@@ -1,4 +1,4 @@
-package test.java;
+package test.java.oldHomeWorks;
 
 import io.restassured.RestAssured;
 import io.restassured.http.Cookie;

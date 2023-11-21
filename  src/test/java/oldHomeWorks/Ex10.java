@@ -1,4 +1,4 @@
-package test.java;
+package test.java.oldHomeWorks;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
