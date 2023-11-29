@@ -1,9 +1,14 @@
 package test.java.tests;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import org.junit.FixMethodOrder;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.runners.MethodSorters;
 import test.java.lib.ApiCoreRequests;
 import test.java.lib.Assertions;
 import test.java.lib.BaseTestCase;
@@ -12,10 +17,14 @@ import test.java.lib.DataGenerator;
 import java.util.HashMap;
 import java.util.Map;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserEditTest extends BaseTestCase {
     private final ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
 
     @Test
+    @Epic("Тестирование REST API")
+    @Feature("Редактирование")
+    @DisplayName("Редактирование нового пользователя")
     public void testEditJustCreatedTest() {
         //GenerateUser
         Map<String, String> userData = DataGenerator.getRegistrationData();
@@ -65,10 +74,10 @@ public class UserEditTest extends BaseTestCase {
         Assertions.assertJsonByName(responseUserData, "firstName", newName);
     }
 
-    /**
-     * Попытка изменения данных пользователя без авторизации
-     */
     @Test
+    @Epic("Тестирование REST API")
+    @Feature("Редактирование")
+    @DisplayName("Попытка изменения данных пользователя без авторизации")
     public void testEditWithoutAuthorization() {
         //GENERATE USER
         Map<String, String> userData = DataGenerator.getRegistrationData();
@@ -99,10 +108,10 @@ public class UserEditTest extends BaseTestCase {
         Assertions.assertJsonByName(responseUserData, "firstName", userData.get("username"));
     }
 
-    /**
-     * Попытка изменения данных пользователя будучи авторизованными другим пользователем
-     */
     @Test
+    @Epic("Тестирование REST API")
+    @Feature("Редактирование")
+    @DisplayName("Попытка изменения данных пользователя будучи авторизованными другим пользователем")
     public void testEditAnotherUserAuthorization() {
         //GENERATE USER FOR CHANGE
         Map<String, String> userData = DataGenerator.getRegistrationData();
@@ -153,10 +162,10 @@ public class UserEditTest extends BaseTestCase {
         Assertions.assertJsonByName(responseUserData, "firstName", userForChangeUsername);
     }
 
-    /**
-     * Попытка изменения email пользователя будучи авторизованными тем же пользователем, на новый email без символа @
-     */
     @Test
+    @Epic("Тестирование REST API")
+    @Feature("Редактирование")
+    @DisplayName("Попытка изменения email пользователя будучи авторизованными тем же пользователем, на новый email без символа @")
     public void testEditWithIncorrectEmail() {
         //GENERATE USER
         Map<String, String> userData = DataGenerator.getRegistrationData();
@@ -186,10 +195,10 @@ public class UserEditTest extends BaseTestCase {
         Assertions.assertResponseTextEquals(responseEditUser, "Invalid email format");
     }
 
-    /**
-     * Попытка изменения firstName пользователя, будучи авторизованными тем же пользователем, на очень короткое значение в один символ
-     */
     @Test
+    @Epic("Тестирование REST API")
+    @Feature("Редактирование")
+    @DisplayName("Попытка изменения firstName пользователя, будучи авторизованными тем же пользователем, на очень короткое значение в один символ")
     public void testEditWithShortFirstName() {
         //GENERATE USER
         Map<String, String> userData = DataGenerator.getRegistrationData();

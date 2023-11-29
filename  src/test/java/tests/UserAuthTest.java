@@ -1,21 +1,22 @@
 package test.java.tests;
 
-import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.runners.MethodSorters;
 import test.java.lib.ApiCoreRequests;
 import test.java.lib.BaseTestCase;
+import org.junit.FixMethodOrder;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import test.java.lib.Assertions;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserAuthTest extends BaseTestCase {
 
     String cookie;
@@ -37,6 +38,9 @@ public class UserAuthTest extends BaseTestCase {
     }
 
     @Test
+    @Epic("Тестирование REST API")
+    @Feature("Авторизация")
+    @DisplayName("Тест на авторизацию пользователя")
     public void testAuthUser() {
 
         Response responseCheckAuth = apiCoreRequests.makeGetRequest("https://playground.learnqa.ru/api/user/auth", this.header, this.cookie);

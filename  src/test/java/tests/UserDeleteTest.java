@@ -1,8 +1,12 @@
 package test.java.tests;
 
+import io.qameta.allure.*;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import org.junit.FixMethodOrder;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.runners.MethodSorters;
 import test.java.lib.ApiCoreRequests;
 import test.java.lib.Assertions;
 import test.java.lib.BaseTestCase;
@@ -10,14 +14,15 @@ import test.java.lib.DataGenerator;
 
 import java.util.HashMap;
 import java.util.Map;
-
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserDeleteTest extends BaseTestCase {
     private final ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
 
-    /**
-     * Попытка удалить пользователя по ID 2
-     */
     @Test
+    @Epic("Тестирование REST API")
+    @Feature("Удаление")
+    @DisplayName("Попытка удалить пользователя по ID 2")
+    @Owner("Иванов")
     public void tryDelUserWithId2() {
 
         //LOGIN & AUTH
@@ -39,11 +44,11 @@ public class UserDeleteTest extends BaseTestCase {
         Assertions.assertResponseTextEquals(responseDelUser, "Please, do not delete test users with ID 1, 2, 3, 4 or 5.");
     }
 
-
-    /**
-     * Тест на удаление пользователя
-     */
     @Test
+    @Epic("Тестирование REST API")
+    @Feature("Удаление")
+    @DisplayName("Тест на удаление пользователя")
+    @Issue("https://jira..ru/browse/XXX-26223")
     public void delUserTest() {
         //GENERATE USER
         Map<String, String> userData = DataGenerator.getRegistrationData();
@@ -74,10 +79,11 @@ public class UserDeleteTest extends BaseTestCase {
         Assertions.assertResponseTextEquals(responseUserData, "User not found");
     }
 
-    /**
-     * Тест на попытку удаления пользователя, будучи авторизованными другим пользователем
-     */
     @Test
+    @Epic("Тестирование REST API")
+    @Feature("Удаление")
+    @DisplayName("Тест на попытку удаления пользователя, будучи авторизованными другим пользователем")
+    @Flaky
     public void tryDelUserWithAnotherUserAuthorization() {
         //GENERATE USER FOR DEL
         Map<String, String> userData = DataGenerator.getRegistrationData();
